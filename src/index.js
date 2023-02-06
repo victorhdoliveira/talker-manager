@@ -1,6 +1,6 @@
 const express = require('express');
 
-const readTalkerFile = require('./routes/talkerRoute');
+const talkerRoute = require('./routes/talkerRoute');
 
 const app = express();
 app.use(express.json());
@@ -17,4 +17,4 @@ app.listen(PORT, () => {
   console.log('Online');
 });
 
-app.use('/talker', readTalkerFile);
+app.use('/talker', talkerRoute);

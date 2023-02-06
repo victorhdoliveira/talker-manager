@@ -9,6 +9,17 @@ async function readTalkerFile() {
     }
   }
 
+  async function readTalkerID(id) {
+    try {
+        const data = await readTalkerFile();
+        const searchID = data.find((e) => e.id === Number(id));
+        return searchID;
+    } catch (error) {
+        console.error(error.message);
+    }
+  }
+
 module.exports = {
     readTalkerFile,
+    readTalkerID,
 };
