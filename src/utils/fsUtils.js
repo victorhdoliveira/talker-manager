@@ -9,7 +9,7 @@ async function readTalkerFile() {
     }
   }
 
-  async function readTalkerID(id) {
+async function readTalkerID(id) {
     try {
         const data = await readTalkerFile();
         const searchID = data.find((e) => e.id === Number(id));
