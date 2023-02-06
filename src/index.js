@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require('fs/promises');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
@@ -13,4 +15,11 @@ app.get('/', (_request, response) => {
 
 app.listen(PORT, () => {
   console.log('Online');
+});
+
+app.get('/talker', async (req, res) => {
+  const contentPath = path.resolve(__dirname, 'talker.json');
+  const content = await fs.readFile(contentPath, 'utf8');
+  const talkers = JSON.parse(content);
+  res.status(HTTP_OK_STATUS).json(talkers);
 });
