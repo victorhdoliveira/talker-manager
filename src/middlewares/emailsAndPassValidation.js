@@ -11,7 +11,7 @@ const emailValidation = async (req, res, next) => {
             message: 'O "email" deve ter o formato "email@email.com"',
         }); 
     } 
-    next();
+    return next();
 };
 
 const passwordValidation = async (req, res, next) => {
@@ -26,7 +26,7 @@ const passwordValidation = async (req, res, next) => {
             message: 'O "password" deve ter pelo menos 6 caracteres',
         });
     }
-    next();
+    return next();
 };
 
 module.exports = {

@@ -19,7 +19,21 @@ async function readTalkerID(id) {
     }
   }
 
+async function insertData(post) {
+try {
+    const data = await readTalkerFile();
+    const newId = data.length + 1;
+    const newTalker = { id: newId, ...post };
+    data.push(newTalker);
+    await fs.writeFile('src/talker.json', JSON.stringify(data));
+    return newTalker;
+} catch (error) {
+    console.error(error.message);
+}
+}
+
 module.exports = {
     readTalkerFile,
     readTalkerID,
+    insertData,
 };
