@@ -1,5 +1,5 @@
 const express = require('express');
-const { readTalkerFile, readTalkerID, insertData } = require('../utils/fsUtils');
+const { readTalkerFile, readTalkerID, insertData, editData } = require('../utils/fsUtils');
 const { nameValidation, tokenValidation, ageValidation, talkValidation, watchedAtValidation,
   rateValidation } = require('../middlewares/talkerAuth');
 
@@ -29,6 +29,13 @@ router.post('/', async (req, res) => {
   const talkerBody = req.body;
   const insert = await insertData(talkerBody);
   return res.status(201).json(insert);
+});
+
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, age, talk } = req.body;
+  const edit = await editData(id, name, age, talk);
+  return res.status(200).json(edit);
 });
 
 module.exports = router;
