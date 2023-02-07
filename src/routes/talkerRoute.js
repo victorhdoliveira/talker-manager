@@ -1,5 +1,6 @@
 const express = require('express');
-const { readTalkerFile, readTalkerID, insertData, editData } = require('../utils/fsUtils');
+const { readTalkerFile, readTalkerID,
+  insertData, editData, deleteData } = require('../utils/fsUtils');
 const { nameValidation, tokenValidation, ageValidation, talkValidation, watchedAtValidation,
   rateValidation } = require('../middlewares/talkerAuth');
 
@@ -20,6 +21,12 @@ router.get('/:id', async (req, res) => {
     return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
     }
     return res.status(200).json(talker);
+});
+
+router.delete('/:id', tokenValidation, async (req, res) => {
+  const { id } = req.params;
+  const remainingTalkers = await deleteData(id);
+  return res.status(204).json(remainingTalkers);
 });
 
 router.use(tokenValidation, nameValidation, ageValidation, talkValidation,

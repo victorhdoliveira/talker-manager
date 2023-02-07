@@ -44,9 +44,21 @@ async function editData(id, name, age, talk) {
     }
 }
 
+async function deleteData(id) {
+    try {
+        const data = await readTalkerFile();
+        const notDeleteId = data.filter((e) => e.id !== Number(id));
+        await fs.writeFile('src/talker.json', JSON.stringify(notDeleteId));
+        return notDeleteId;
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
 module.exports = {
     readTalkerFile,
     readTalkerID,
     insertData,
     editData,
+    deleteData,
 };
