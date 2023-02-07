@@ -1,10 +1,16 @@
 const express = require('express');
 const { readTalkerFile, readTalkerID,
-  insertData, editData, deleteData } = require('../utils/fsUtils');
+  insertData, editData, deleteData, searchTalker } = require('../utils/fsUtils');
 const { nameValidation, tokenValidation, ageValidation, talkValidation, watchedAtValidation,
   rateValidation } = require('../middlewares/talkerAuth');
 
 const router = express.Router();
+
+router.get('/search', tokenValidation, async (req, res) => {
+  const { q } = req.query;
+  const searchingFor = await searchTalker(q);
+  return res.status(200).json(searchingFor);
+});
 
 router.get('/', async (_req, res, next) => {
   const talkers = await readTalkerFile();
