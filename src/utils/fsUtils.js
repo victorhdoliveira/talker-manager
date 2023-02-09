@@ -1,19 +1,19 @@
 const fs = require('fs/promises');
 
-async function writeFile(data) {
- await fs.writeFile('src/talker.json', JSON.stringify(data));
-}
+const writeFile = async (data) => {
+    await fs.writeFile('src/talker.json', JSON.stringify(data));
+};
 
-async function readTalkerFile() {
+const readTalkerFile = async () => {
     try {
         const content = await fs.readFile('src/talker.json', 'utf8');
         return JSON.parse(content);
     } catch (error) {
         return console.log('Erro em encontrar a lista de palestrantes');
     }
-  }
+};
 
-  async function searchTalker(searching) {
+const searchTalker = async (searching) => {
     try {
         const data = await readTalkerFile();
         const filtering = data.filter((e) => e.name.includes(searching));
@@ -22,9 +22,9 @@ async function readTalkerFile() {
     } catch (error) {
         return console.log('Erro ao buscar um palestrante');
     }
-}
+};
 
-async function readTalkerID(id) {
+const readTalkerID = async (id) => {
     try {
         const data = await readTalkerFile();
         const searchId = data.find((e) => e.id === Number(id));
@@ -32,9 +32,9 @@ async function readTalkerID(id) {
     } catch (error) {
         return console.log('Erro em encontrar o palestrante através ID');
     }
-  }
+};
 
-async function insertData(post) {
+const insertNewTalker = async (post) => {
     try {
         const data = await readTalkerFile();
         const newId = data.length + 1;
@@ -45,9 +45,9 @@ async function insertData(post) {
     } catch (error) {
         return console.log('Erro ao adicionar palestrante');
     }
-}
+};
 
-async function editData(id, name, age, talk) {
+const editTalker = async (id, name, age, talk) => {
     try {
         const data = await readTalkerFile();
         const searchId = data.find((e) => e.id === Number(id));
@@ -57,9 +57,9 @@ async function editData(id, name, age, talk) {
     } catch (error) {
         return console.log('Erro ao editar o palestrante através ID');
     }
-}
+};
 
-async function deleteData(id) {
+const deleteTalker = async (id) => {
     try {
         const data = await readTalkerFile();
         const notDeleteId = data.filter((e) => e.id !== Number(id));
@@ -68,13 +68,13 @@ async function deleteData(id) {
     } catch (error) {
         return console.log('Erro ao deletar palestrante');
     }
-}
+};
 
 module.exports = {
     readTalkerFile,
     readTalkerID,
-    insertData,
-    editData,
-    deleteData,
+    insertNewTalker,
+    editTalker,
+    deleteTalker,
     searchTalker,
 };

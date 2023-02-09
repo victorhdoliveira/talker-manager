@@ -1,8 +1,8 @@
 const express = require('express');
-const { readTalkerFile, readTalkerID,
-  insertData, editData, deleteData, searchTalker } = require('../utils/fsUtils');
-const { nameValidation, tokenValidation, ageValidation, talkValidation, watchedAtValidation,
-  rateValidation } = require('../middlewares/talkerAuth');
+const { readTalkerFile, readTalkerID, insertNewTalker,
+  editTalker, deleteTalker, searchTalker } = require('../utils/fsUtils');
+const { nameValidation, tokenValidation, ageValidation, talkValidation, 
+  watchedAtValidation, rateValidation } = require('../middlewares/talkerAuth');
 
 const router = express.Router();
 
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
 
 router.delete('/:id', tokenValidation, async (req, res) => {
   const { id } = req.params;
-  const remainingTalkers = await deleteData(id);
+  const remainingTalkers = await deleteTalker(id);
   return res.status(204).json(remainingTalkers);
 });
 
@@ -40,14 +40,14 @@ router.use(tokenValidation, nameValidation, ageValidation, talkValidation,
 
 router.post('/', async (req, res) => {
   const talkerBody = req.body;
-  const insert = await insertData(talkerBody);
+  const insert = await insertNewTalker(talkerBody);
   return res.status(201).json(insert);
 });
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { name, age, talk } = req.body;
-  const edit = await editData(id, name, age, talk);
+  const edit = await editTalker(id, name, age, talk);
   return res.status(200).json(edit);
 });
 

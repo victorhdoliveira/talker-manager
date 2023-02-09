@@ -12,7 +12,7 @@ const tokenValidation = async (req, res, next) => {
         message: 'Token inválido',
       });
     } 
-    next();
+    return next();
 };
 
 const nameValidation = async (req, res, next) => {
