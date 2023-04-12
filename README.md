@@ -1,6 +1,6 @@
 ## Projeto Talker Manager
 
-O objetivo deste projeto é criar uma aplicação para registro de palestrantes (talkers), na qual o usuário poderá cadastrar, visualizar, pesquisar, editar e excluir informações. Para isso, foi desenvolvida uma API com as operações básicas de um CRUD (Criar, Ler, Atualizar e Deletar) para gerenciar os dados dos palestrantes. Também foram criados alguns endpoints que utilizam o módulo fs para ler e escrever informações em um arquivo.
+O objetivo deste projeto é criar uma aplicação para registro de palestrantes (talkers), na qual o usuário poderá cadastrar, visualizar, pesquisar, editar e excluir informações. Para isso, foi desenvolvida uma API com as operações básicas de um CRUD (Criar, Ler, Atualizar e Deletar) para gerenciar os dados dos palestrantes. Também foram criados alguns endpoints que utilizam o módulo fs para ler e escrever informações em um arquivo, utilizando o módulo fs.
 
 ## Tecnologias
 * Docker
